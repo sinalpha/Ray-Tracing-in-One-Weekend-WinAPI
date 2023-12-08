@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="one-weekend-ray-tracing">
+      <UniqueIdentifier>{dc1746cf-f88e-4dfb-841c-7b6a7091dbfa}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="oneWeekRayTracing\main.cpp">
+      <Filter>one-weekend-ray-tracing</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
