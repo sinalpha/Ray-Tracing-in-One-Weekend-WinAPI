@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ray-tracing", "ray-tracing.vcxproj", "{CFE28277-8494-4A89-9301-88C58C8D5CBB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OWRT", "ray-tracing.vcxproj", "{CFE28277-8494-4A89-9301-88C58C8D5CBB}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TEST", "TEST\TEST.vcxproj", "{BC1D8E5F-2D22-4354-A06E-134505ADC09E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,14 @@ Global
 		{CFE28277-8494-4A89-9301-88C58C8D5CBB}.Release|x64.Build.0 = Release|x64
 		{CFE28277-8494-4A89-9301-88C58C8D5CBB}.Release|x86.ActiveCfg = Release|Win32
 		{CFE28277-8494-4A89-9301-88C58C8D5CBB}.Release|x86.Build.0 = Release|Win32
+		{BC1D8E5F-2D22-4354-A06E-134505ADC09E}.Debug|x64.ActiveCfg = Debug|x64
+		{BC1D8E5F-2D22-4354-A06E-134505ADC09E}.Debug|x64.Build.0 = Debug|x64
+		{BC1D8E5F-2D22-4354-A06E-134505ADC09E}.Debug|x86.ActiveCfg = Debug|Win32
+		{BC1D8E5F-2D22-4354-A06E-134505ADC09E}.Debug|x86.Build.0 = Debug|Win32
+		{BC1D8E5F-2D22-4354-A06E-134505ADC09E}.Release|x64.ActiveCfg = Release|x64
+		{BC1D8E5F-2D22-4354-A06E-134505ADC09E}.Release|x64.Build.0 = Release|x64
+		{BC1D8E5F-2D22-4354-A06E-134505ADC09E}.Release|x86.ActiveCfg = Release|Win32
+		{BC1D8E5F-2D22-4354-A06E-134505ADC09E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
