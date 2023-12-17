@@ -31,7 +31,7 @@ public:
 
 // point3는 vec3의 재명명일뿐 별다른 기능은 없다.
 // 그러나 코드를 짤 때 기하학적 명료함에는 도움이 된다.
-using poin3 = vec3;
+using point3 = vec3;
 
 // Vector Utility Functions
 
