@@ -2,13 +2,20 @@
 
 #include "include/color.h"
 
+
+//win
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 HINSTANCE g_hInst;
 LPCTSTR lpszClass = TEXT("DrawText");
 
-constexpr int image_width = 256;
-constexpr int image_height = 256;
+//ray-tracer
+constexpr double aspect_ratio = 16.0 / 9.0;
+int image_width;
+int image_height;
+double viewport_height;
+double viewport_width;
 
+//main
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreInstance
 	, LPSTR lpszCmdParam, int nCmdShow)
 {
@@ -34,6 +41,15 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreInstance
 		NULL, (HMENU)NULL, hInstance, NULL);
 	ShowWindow(hWnd, nCmdShow);
 
+	//ray-tracer
+	image_width = 400;
+	image_height = static_cast<const int>(image_width / aspect_ratio);
+	image_height = (image_height < 1) ? 1 : image_height;
+
+	viewport_height = 2.0f;
+	viewport_width = viewport_height * (static_cast<double>(image_width) / image_height);
+
+	//event loop
 	while (GetMessage(&Message, NULL, 0, 0)) {
 		TranslateMessage(&Message);
 		DispatchMessage(&Message);
