@@ -1,12 +1,12 @@
 #include <windows.h>
 
 #include "include/color.h"
-
+#include "include/ray.h"
 
 //win
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 HINSTANCE g_hInst;
-LPCTSTR lpszClass = TEXT("DrawText");
+LPCTSTR lpszClass = TEXT("rt-win");
 
 //ray-tracer
 constexpr double aspect_ratio = 16.0 / 9.0;
@@ -14,11 +14,44 @@ int image_width;
 int image_height;
 double viewport_height;
 double viewport_width;
+double focal_length;
+point3 camera_center = point3(0, 0, 0);
+vec3 viewport_u;
+vec3 viewport_v;
+vec3 pixel_delta_u;
+vec3 pixel_delta_v;
+point3 viewport_upper_left;
+point3 pixel00_loc;
+
+
+color ray_color(const ray& r) {
+	vec3 unit_direction = unit_vector(r.direction());
+	double a = 0.5 * (unit_direction.y() + 1.0);
+	return (1.0 - a) * color(1.0, 1.0, 1.0) + a * color(0.5, 0.7, 1.0);
+}
 
 //main
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreInstance
 	, LPSTR lpszCmdParam, int nCmdShow)
 {
+	//ray-tracer
+	image_width = 400;
+	image_height = static_cast<const int>(image_width / aspect_ratio);
+	image_height = (image_height < 1) ? 1 : image_height;
+
+	//cam
+
+	focal_length = 1.0;
+	viewport_height = 2.0f;
+	viewport_width = viewport_height * (static_cast<double>(image_width) / image_height);
+	camera_center = point3(0, 0, 0);
+	pixel_delta_u = viewport_u / image_width;
+	pixel_delta_v = viewport_v / image_height;
+	viewport_upper_left = camera_center - vec3(0, 0, focal_length) - viewport_u / 2 - viewport_v / 2;
+	pixel00_loc = viewport_upper_left + 0.5 * (pixel_delta_u + pixel_delta_v);
+
+
+	//win
 	HWND hWnd;
 	MSG Message;
 	WNDCLASS WndClass;
@@ -41,13 +74,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreInstance
 		NULL, (HMENU)NULL, hInstance, NULL);
 	ShowWindow(hWnd, nCmdShow);
 
-	//ray-tracer
-	image_width = 400;
-	image_height = static_cast<const int>(image_width / aspect_ratio);
-	image_height = (image_height < 1) ? 1 : image_height;
-
-	viewport_height = 2.0f;
-	viewport_width = viewport_height * (static_cast<double>(image_width) / image_height);
+	
 
 	//event loop
 	while (GetMessage(&Message, NULL, 0, 0)) {
@@ -72,7 +99,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		// Render
 		for (int j = 0; j < image_height; ++j) {
 			for (int i = 0; i < image_width; ++i) {
-				color pixel_color = color(double(i) / (image_width - 1), double(j) / (image_height - 1), 0);
+				point3 pixel_center = pixel00_loc + (i * pixel_delta_u) + (j * pixel_delta_v);
+				vec3 ray_direction = pixel_center - camera_center;
+				ray r(camera_center, ray_direction);
+
+				color pixel_color = ray_color(r);
+				
 				write_color(hdc, i, j, pixel_color);
 			}
 		}

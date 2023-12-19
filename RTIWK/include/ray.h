@@ -1,22 +1,20 @@
 #ifndef RAY_H
 #define RAY_H
 
-#include "../include/vec3.h"
+#include "vec3.h"
 
 class ray {
 public:
-	ray();
+    ray();
 
-	ray(const point3&, const vec3& );
+    ray(const point3& origin, const vec3& direction);
 
-	point3 origin() const;
-	vec3 direction() const;
-
-	point3 at(double) const;
-
+    point3 origin() const;
+    vec3 direction() const;
+    point3 at(double t) const;
 private:
-	point3 orig;
-	vec3 dir;
+    point3 orig;
+    vec3 dir;
 };
 
 #endif
