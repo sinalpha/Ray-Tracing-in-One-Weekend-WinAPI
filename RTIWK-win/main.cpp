@@ -24,18 +24,22 @@ point3 viewport_upper_left;
 point3 pixel00_loc;
 
 
-bool hit_sphere(const point3& center, double radius, const ray& r) {
+double hit_sphere(const point3& center, double radius, const ray& r) {
 	vec3 oc = r.origin() - center;
 	double a = dot(r.direction(), r.direction());
 	double b = 2.0 * dot(oc, r.direction());
 	double c = dot(oc, oc) - radius * radius;
 	double discriminant = b * b - 4 * a * c;
-	return (discriminant >= 0);
+
+	return discriminant < 0 ? -1.0 : (-b - sqrt(discriminant)) / (2.0 * a);
 }
 
 color ray_color(const ray& r) {
-	if (hit_sphere(point3(0, 0, -1), 0.5, r))
-		return color(1, 0, 0);
+	double t = hit_sphere(point3(0, 0, -1), 0.5, r);
+	if (t > 0.0) {
+		vec3 normal{ unit_vector(r.at(t) - vec3(0,0,-1)) };
+		return 0.5 * color{ normal.x() + 1, normal.y() + 1, normal.z() + 1 };
+	}
 
 	vec3 unit_direction = unit_vector(r.direction());
 	auto a = 0.5 * (unit_direction.y() + 1.0);
@@ -52,7 +56,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreInstance
 	image_height = (image_height < 1) ? 1 : image_height;
 
 	//cam
-
 	focal_length = 1.0;
 	viewport_height = 2.0;
 	viewport_width = viewport_height * (static_cast<double>(image_width) / image_height);
@@ -67,35 +70,37 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreInstance
 
 	//win
 	HWND hWnd;
-	MSG Message;
-	WNDCLASS WndClass;
-	g_hInst = hInstance;
-
-	WndClass.cbClsExtra = 0;
-	WndClass.cbWndExtra = 0;
-	WndClass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
-	WndClass.hCursor = LoadCursor(NULL, IDC_ARROW);
-	WndClass.hIcon = LoadIcon(NULL, IDI_APPLICATION);
-	WndClass.hInstance = hInstance;
-	WndClass.lpfnWndProc = WndProc;
-	WndClass.lpszClassName = lpszClass;
-	WndClass.lpszMenuName = NULL;
-	WndClass.style = CS_HREDRAW | CS_VREDRAW;
+	WNDCLASS WndClass{
+		CS_HREDRAW | CS_VREDRAW,
+		WndProc,
+		0,
+		0,
+		hInstance,
+		LoadIcon(NULL, IDI_APPLICATION),
+		LoadCursor(NULL, IDC_ARROW),
+		(HBRUSH)GetStockObject(WHITE_BRUSH),
+		NULL,
+		lpszClass,
+	};
 	RegisterClass(&WndClass);
+
+	g_hInst = hInstance;
 
 	hWnd = CreateWindow(lpszClass, lpszClass, WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, CW_USEDEFAULT, image_width + 16, image_height + 39,
 		NULL, (HMENU)NULL, hInstance, NULL);
 	ShowWindow(hWnd, nCmdShow);
-
 	
 
 	//event loop
+	MSG Message{};
 	while (GetMessage(&Message, NULL, 0, 0)) {
 		TranslateMessage(&Message);
 		DispatchMessage(&Message);
 	}
 
+	DestroyWindow(hWnd);
+	UnregisterClass(WndClass.lpszClassName, WndClass.hInstance);
 	return (int)Message.wParam;
 }
 
