@@ -20,7 +20,7 @@ public:
 	void clear();
 
 	void add(shared_ptr<hittable>);
-	bool hit(const ray& r, double ray_tmin, double ray_tamx, hit_record& rec) const;
+	bool hit(const ray&, interval, hit_record& ) const;
 };
 
 #endif

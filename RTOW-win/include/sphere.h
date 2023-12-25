@@ -7,7 +7,7 @@ class sphere : public hittable {
 public:
 
 	sphere(point3, double);
-	bool hit(const ray&, double, double, hit_record&) const override;
+	bool hit(const ray&, interval, hit_record&) const override;
 
 private:
 	point3 center;

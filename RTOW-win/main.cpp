@@ -33,7 +33,7 @@ hittable_list world;
 color ray_color(const ray& r, const hittable& world) {
 	hit_record rec;
 	//교차하면 rec에 정보가 저장되고 then이 실행됨.
-	if (world.hit(r, 0, infinity, rec)) {
+	if (world.hit(r, interval(0, infinity), rec)) {
 		return 0.5 * (rec.normal + color(1, 1, 1));
 	}
 	vec3 unit_direction = unit_vector(r.direction());
