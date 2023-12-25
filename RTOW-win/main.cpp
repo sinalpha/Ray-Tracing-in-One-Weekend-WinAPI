@@ -1,7 +1,11 @@
 #include <windows.h>
 
+#include "include/rtweekend.h"
 #include "include/color.h"
 #include "include/ray.h"
+#include "include/sphere.h"
+#include "include/hittable.h"
+#include "include/hittable_list.h"
 
 //win
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
@@ -22,27 +26,18 @@ vec3 pixel_delta_u;
 vec3 pixel_delta_v;
 point3 viewport_upper_left;
 point3 pixel00_loc;
+hittable_list world;
 
 
-double hit_sphere(const point3& center, double radius, const ray& r) {
-	vec3 oc = r.origin() - center;
-	double a = r.direction().length_squared();
-	double half_b = dot(oc, r.direction());
-	double c = oc.length_squared() - radius * radius;
-	double discriminant = half_b * half_b - a * c;
-
-	return discriminant < 0 ? -1.0 : (-half_b - sqrt(discriminant)) / a;
-}
-
-color ray_color(const ray& r) {
-	double t = hit_sphere(point3(0, 0, -1), 0.5, r);
-	if (t > 0.0) {
-		vec3 normal{ unit_vector(r.at(t) - vec3(0,0,-1)) };
-		return 0.5 * color{ normal.x() + 1, normal.y() + 1, normal.z() + 1 };
+//한 광선이 월드에 있는 오브젝트와 교차하는지 검사한다.
+color ray_color(const ray& r, const hittable& world) {
+	hit_record rec;
+	//교차하면 rec에 정보가 저장되고 then이 실행됨.
+	if (world.hit(r, 0, infinity, rec)) {
+		return 0.5 * (rec.normal + color(1, 1, 1));
 	}
-
 	vec3 unit_direction = unit_vector(r.direction());
-	auto a = 0.5 * (unit_direction.y() + 1.0);
+	double a = 0.5 * (unit_direction.y() + 1.0);
 	return (1.0 - a) * color(1.0, 1.0, 1.0) + a * color(0.5, 0.7, 1.0);
 }
 
@@ -55,6 +50,10 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreInstance
 	image_height = static_cast<int>(image_width / aspect_ratio);
 	image_height = (image_height < 1) ? 1 : image_height;
 
+	//world
+	world.add(make_shared<sphere>(point3(0, 0, -1), 0.5));
+	world.add(make_shared<sphere>(point3(0, -100.5, -1), 100));
+	
 	//cam
 	focal_length = 1.0;
 	viewport_height = 2.0;
@@ -123,7 +122,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 				vec3 ray_direction = pixel_center - camera_center;
 				ray r(camera_center, ray_direction);
 
-				color pixel_color = ray_color(r);
+				color pixel_color = ray_color(r, world);
 				
 				write_color(hdc, i, j, pixel_color);
 			}

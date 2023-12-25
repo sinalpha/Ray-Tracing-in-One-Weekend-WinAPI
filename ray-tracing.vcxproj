@@ -18,17 +18,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="RTIWK\main.cpp" />
-    <ClCompile Include="RTIWK\src\color.cpp" />
-    <ClCompile Include="RTIWK\src\ray.cpp" />
-    <ClCompile Include="RTIWK\src\vec3.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="RTIWK\include\color.h" />
-    <ClInclude Include="RTIWK\include\ray.h" />
-    <ClInclude Include="RTIWK\include\vec3.h" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

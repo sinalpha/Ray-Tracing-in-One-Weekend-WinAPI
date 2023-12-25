@@ -130,14 +130,18 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\color.cpp" />
+    <ClCompile Include="src\hittable_list.cpp" />
     <ClCompile Include="src\ray.cpp" />
+    <ClCompile Include="src\rtweekend.cpp" />
     <ClCompile Include="src\sphere.cpp" />
     <ClCompile Include="src\vec3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\color.h" />
     <ClInclude Include="include\hittable.h" />
+    <ClInclude Include="include\hittable_list.h" />
     <ClInclude Include="include\ray.h" />
+    <ClInclude Include="include\rtweekend.h" />
     <ClInclude Include="include\sphere.h" />
     <ClInclude Include="include\vec3.h" />
   </ItemGroup>

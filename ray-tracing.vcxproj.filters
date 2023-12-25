@@ -8,27 +8,4 @@
       <UniqueIdentifier>{e777a6b9-8a67-4ca0-9fbd-4863ac119a60}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="RTIWK\src\vec3.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="RTIWK\main.cpp" />
-    <ClCompile Include="RTIWK\src\color.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="RTIWK\src\ray.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="RTIWK\include\color.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="RTIWK\include\vec3.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="RTIWK\include\ray.h">
-      <Filter>include</Filter>
-    </ClInclude>
-  </ItemGroup>
 </Project>
