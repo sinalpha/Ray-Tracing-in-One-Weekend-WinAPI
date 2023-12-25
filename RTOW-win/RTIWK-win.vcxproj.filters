@@ -37,6 +37,9 @@
     <ClCompile Include="src\interval.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="src\camera.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\color.h">
@@ -61,6 +64,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="include\interval.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="include\camera.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
