@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RTIOW", "ray-tracing.vcxproj", "{CFE28277-8494-4A89-9301-88C58C8D5CBB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RTOW", "ray-tracing.vcxproj", "{CFE28277-8494-4A89-9301-88C58C8D5CBB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RTIWK-win", "RTIWK-win\RTIWK-win.vcxproj", "{05D713B7-CC6F-4301-96A8-750EA2BD48F9}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RTOW-win", "RTOW-win\RTIWK-win.vcxproj", "{05D713B7-CC6F-4301-96A8-750EA2BD48F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

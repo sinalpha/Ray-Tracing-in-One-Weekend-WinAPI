@@ -24,6 +24,7 @@
     <ProjectGuid>{05d713b7-cc6f-4301-96a8-750ea2bd48f9}</ProjectGuid>
     <RootNamespace>RTIWKwin</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>RTOW-win</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -130,11 +131,14 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\color.cpp" />
     <ClCompile Include="src\ray.cpp" />
+    <ClCompile Include="src\sphere.cpp" />
     <ClCompile Include="src\vec3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\color.h" />
+    <ClInclude Include="include\hittable.h" />
     <ClInclude Include="include\ray.h" />
+    <ClInclude Include="include\sphere.h" />
     <ClInclude Include="include\vec3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
