@@ -5,6 +5,7 @@
 #include "include/camera.h"
 #include "include/hittable_list.h"
 #include "include/sphere.h"
+#include "include/color.h"
 
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 HINSTANCE g_hInst;

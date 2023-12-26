@@ -1,20 +1,16 @@
-#include "Windows.h"
-
-
 #include "../include/camera.h"
-
 
 void camera::render(HDC hdc, const hittable& world) {
 	initialize();
 
 	for (int j = 0; j < image_height; ++j) {
 		for (int i = 0; i < image_width; ++i) {
-			point3 pixel_center = pixel00_loc + (i * pixel_delta_u) + (j * pixel_delta_v);
-			vec3 ray_direction = pixel_center - center;
-			ray r(center, ray_direction);
-
-			color pixel_color = ray_color(r, world);
-			write_color(hdc, i, j, pixel_color);
+			color pixel_color(0, 0, 0);
+			for (int sample = 0; sample < samples_per_pixel; ++sample) {
+				ray r{ get_ray(i, j) };
+				pixel_color += ray_color( r, world);
+			}
+			write_color(hdc, i, j, pixel_color, samples_per_pixel);
 		}
 	}
 
@@ -50,4 +46,23 @@ color camera::ray_color(const ray& r, const hittable& world) const {
 	vec3 unit_direction = unit_vector(r.direction());
 	double a{ 0.5 * (unit_direction.y() + 1.0) };
 	return (1.0 - a) * color(1.0, 1.0, 1.0) + a * color(0.5, 0.7, 1.0);
+}
+
+ray camera::get_ray(int i, int j) const {
+	point3 pixel_center{ pixel00_loc + (i * pixel_delta_u) + (j * pixel_delta_v) };
+	//픽셀 i,j의 샘플링 픽셀의 좌표구하기(스크린)
+	point3 pixel_sample{ pixel_center + pixel_sample_square() };
+
+	point3 ray_origin{ center };
+	point3 ray_direction{ pixel_sample - ray_origin };
+
+	return ray(ray_origin, ray_direction);
+}
+
+//이상적 픽셀의 가운데로부터 왼쪽-위 끝으로 옮기고 다시 랜덤으로 0 ~ 1사이의 값 더하기
+vec3 camera::pixel_sample_square() const {
+	double px{ -0.5 + random_double() };
+	double py{ -0.5 + random_double() };
+
+	return (px * pixel_delta_u) + (py * pixel_delta_v);
 }

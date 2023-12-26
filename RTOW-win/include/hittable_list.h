@@ -4,6 +4,7 @@
 #include <memory>
 #include <vector>
 
+#include "rtweekend.h"
 #include "hittable.h"
 
 using std::shared_ptr;
