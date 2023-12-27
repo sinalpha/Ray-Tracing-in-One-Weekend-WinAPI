@@ -1,6 +1,7 @@
 #include <cmath>
 
 #include "../include/vec3.h"
+#include "../include/rtweekend.h"
 
 vec3::vec3() 
 	: e{0,0,0} 
@@ -62,5 +63,13 @@ double vec3::length() const {
 
 double vec3::length_squared() const {
 	return e[0] * e[0] + e[1] * e[1] + e[2] * e[2];
+}
+
+vec3 vec3::random() {
+	return vec3(random_double(), random_double(), random_double());
+}
+
+vec3 vec3::random(double min, double max) {
+	return vec3(random_double(min, max), random_double(min, max), random_double(min, max));
 }
 

@@ -12,7 +12,8 @@ public:
     double  aspect_ratio        = 1.0;  
     int     image_width         = 100; 
     int     image_height        = 100;   
-    int     samples_per_pixel   = 10;
+    int     samples_per_pixel   = 1000;
+    int     max_depth           = 100;
 
     /* Public Camera Parameters Here */
     void render(HDC, const hittable&);
@@ -26,7 +27,7 @@ private:
     /* Private Camera Variables Here */
     void initialize();
     ray get_ray(int, int) const;
-    color ray_color(const ray&, const hittable&) const;
+    color ray_color(const ray&, int, const hittable&) const;
     vec3 pixel_sample_square() const;
 };
 

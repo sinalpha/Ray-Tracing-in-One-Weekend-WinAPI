@@ -26,7 +26,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreInstance
 	cam->image_width = 400;
 	cam->image_height = static_cast<int>(cam->image_width / cam->aspect_ratio);
 	cam->image_height = (cam->image_height < 1) ? 1 : cam->image_height;
-
+	cam->max_depth = 50;
+	
+	
 	//win
 	WNDCLASS wc{
 		CS_HREDRAW | CS_VREDRAW,
@@ -47,8 +49,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreInstance
 	AdjustWindowRect(&wr, WS_OVERLAPPEDWINDOW, FALSE);
 	HWND hWnd = CreateWindow(wc.lpszClassName, lpszClass,
 		WS_OVERLAPPEDWINDOW,
-		100,
-		100, 
+		800,
+		400, 
 		wr.right - wr.left, 
 		wr.bottom - wr.top,
 		NULL, (HMENU)NULL, wc.hInstance, NULL);
