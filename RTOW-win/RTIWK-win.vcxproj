@@ -130,7 +130,6 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\camera.cpp" />
-    <ClCompile Include="src\color.cpp" />
     <ClCompile Include="src\hittable_list.cpp" />
     <ClCompile Include="src\interval.cpp" />
     <ClCompile Include="src\ray.cpp" />
