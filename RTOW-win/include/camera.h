@@ -3,6 +3,7 @@
 
 #include <Windows.h>
 
+#include "material.h"
 #include "rtweekend.h"
 #include "color.h"
 #include "hittable.h"

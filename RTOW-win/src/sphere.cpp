@@ -1,6 +1,7 @@
 #include "../include/sphere.h"
 
-sphere::sphere(point3 center_, double radius_) : center(center_), radius(radius_) {}
+sphere::sphere(point3 center_, double radius_, shared_ptr<material> material_)
+	: center(center_), radius(radius_), mat(material_) {}
 
 bool sphere::hit(const ray& r, interval ray_t, hit_record& rec) const {
 
@@ -27,6 +28,7 @@ bool sphere::hit(const ray& r, interval ray_t, hit_record& rec) const {
 	// 그냥 빼는 것은 안과 밖을 정할 수 없으므로 set_face_normal에서 dot 곱을 해야함.
 	vec3 outward_normal{ (rec.p - center) / radius };
 	rec.set_face_normal(r, outward_normal);;
+	rec.mat = mat;
 
 	return true;
 }
