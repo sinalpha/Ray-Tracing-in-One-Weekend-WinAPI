@@ -11,10 +11,12 @@
 class camera {
 public:
     double  aspect_ratio        = 1.0;  
+    double  vfov                = 90;
     int     image_width         = 100; 
     int     image_height        = 100;   
     int     samples_per_pixel   = 1000;
     int     max_depth           = 100;
+
 
     /* Public Camera Parameters Here */
     void render(HDC, const hittable&);
