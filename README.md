@@ -1,4 +1,8 @@
 # ray-tracing
+Porting CLI RTOW into WinAPI RTOW   
+
+## Purpose   
+study Ray-tracing
 
 ## reference   
 https://raytracing.github.io/books/RayTracingInOneWeekend.html   
